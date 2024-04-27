@@ -26,15 +26,28 @@ public abstract class Algorithm {
 
     /**
      * Method to get the average waiting time of the processes.
+     *
      * @return Average waiting time.
      */
-    public abstract double getAverageWaitingTime();
+    public double getAverageWaitingTime() {
+        double totalWaitingTime = 0;
+        for (Process process : processQueue) {
+            totalWaitingTime += process.getWaitingTime();
+        }
+        return totalWaitingTime / processQueue.size();
+    }
 
     /**
      * Method to get the average response time of the processes.
      * @return Average response time.
      */
-    public abstract double getAverageResponseTime();
+    public double getAverageResponseTime() {
+        double totalResponseTime = 0;
+        for (Process process : processQueue) {
+            totalResponseTime += process.getResponseTime();
+        }
+        return totalResponseTime / processQueue.size();
+    }
 
     /**
      * Method to print the scheduling details.

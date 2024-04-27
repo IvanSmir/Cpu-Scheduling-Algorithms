@@ -40,16 +40,6 @@ public class SJF_NP  extends  Algorithm{
     }
 
     @Override
-    public double getAverageWaitingTime() {
-        return 0;
-    }
-
-    @Override
-    public double getAverageResponseTime() {
-        return 0;
-    }
-
-    @Override
     public void printDetails() {
 
     }
