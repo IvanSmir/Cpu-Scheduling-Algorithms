@@ -7,6 +7,7 @@ public class Process {
     private int processId;
     private int arrivalTime;
     private int burstTime;
+    private int priority;
     private int remainingTime;
     private List<Integer> startTimes;
     private List<Integer> endTimes;
@@ -90,4 +91,11 @@ public class Process {
     public void setResponseTime(int responseTime) {
         this.responseTime = responseTime;
     }
+    public int getPriority() {
+        return priority;
+    }
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
 }
