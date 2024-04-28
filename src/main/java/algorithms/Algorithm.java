@@ -9,7 +9,26 @@ import java.util.List;
  */
 public abstract class Algorithm {
 
+
+    private int currentTime = 0;
+
+    public void setProcessQueue(List<Process> processQueue) {
+        this.processQueue = processQueue;
+    }
+
     protected List<Process> processQueue;
+
+    public List<Process> getProcessQueue() {
+        return processQueue;
+    }
+
+    public int getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(int currentTime) {
+        this.currentTime = currentTime;
+    }
 
     /**
      * Constructor for the Algorithm class.
