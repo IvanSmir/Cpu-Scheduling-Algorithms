@@ -17,6 +17,7 @@ public class CSVToClass {
             }
             processList.add(newProcess);
         }
+        processList.sort((o1, o2) -> o1.getArrivalTime() - o2.getArrivalTime());
         return processList;
     }
 }
