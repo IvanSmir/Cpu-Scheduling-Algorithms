@@ -1,9 +1,11 @@
 package main.java;
 
+import main.java.gui.MainFrame;
 import main.java.models.Process;
 import main.java.util.CSVReader;
 import main.java.util.CSVToClass;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,6 +21,6 @@ public class App {
         } catch (IOException e) {
             System.out.println("An error occurred while reading the file" + e.getMessage());
         }
-
+        MainFrame.main(new String[0]);
     }
 }
