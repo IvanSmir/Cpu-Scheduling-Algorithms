@@ -10,19 +10,24 @@ public class FCFS extends Algorithm {
 
     @Override
     public void execute() {
-        int currentTime = 0;
         for (Process process : processQueue) {
-            process.addStartTime(currentTime);
-            currentTime += process.getBurstTime();
+            process.addStartTime(getCurrentTime());
+            setCurrentTime(getCurrentTime()+process.getBurstTime());
             process.setRemainingTime(0);
-            process.addEndTime(currentTime);
-            process.setWaitingTime(currentTime - process.getArrivalTime() - process.getBurstTime());
+            process.addEndTime(getCurrentTime());
+            process.setWaitingTime(getCurrentTime() - process.getArrivalTime() - process.getBurstTime());
             process.setResponseTime(process.getStartTimes().getFirst() - process.getArrivalTime() + 1);
         }
     }
 
     @Override
     public void printDetails() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        System.out.println("First Come First Serve (FCFS) Scheduling Algorithm");
+        System.out.println("Process ID\tStart Time\tWaiting Time\tEjecution Time\tResponse Time");
+        for (Process process : processQueue) {
+            System.out.println(process.getProcessId() + "\t\t\t\t" + process.getStartTimes().getFirst() + "\t\t\t\t"  + process.getWaitingTime() +"\t\t\t\t" + (process.getWaitingTime()+process.getBurstTime())  + "\t\t\t\t" + process.getResponseTime());
+        }
+        System.out.println("Average Waiting Time: " + getAverageWaitingTime());
+        System.out.println("Average Response Time: " + getAverageResponseTime());
     }
 }
