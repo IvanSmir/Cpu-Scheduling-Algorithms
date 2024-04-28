@@ -11,12 +11,11 @@ public class Priority extends Algorithm{
     }
     @java.lang.Override
     public void execute() {
-        int currentTime = 0;
         List<Process> readyQueue = new ArrayList<>();
         int processCount = processQueue.size();
         while (processCount > 0){
             for (Process process : processQueue) {
-                if (process.getArrivalTime() <= currentTime && process.getRemainingTime() > 0){
+                if (process.getArrivalTime() <= getCurrentTime() && process.getRemainingTime() > 0){
                     readyQueue.add(process);
                 }
             }
@@ -27,10 +26,10 @@ public class Priority extends Algorithm{
                 return o1.getPriority() - o2.getPriority();
             });
             Process  currentProcess = readyQueue.getFirst();
-            currentProcess.addStartTime(currentTime);
-            currentTime += currentProcess.getRemainingTime();
+            currentProcess.addStartTime(getCurrentTime());
+            setCurrentTime(getCurrentTime()+currentProcess.getRemainingTime());
             currentProcess.setRemainingTime(0);
-            currentProcess.addEndTime(currentTime);
+            currentProcess.addEndTime(getCurrentTime());
             currentProcess.setWaitingTime(currentProcess.getEndTimes().getFirst() - currentProcess.getArrivalTime() - currentProcess.getBurstTime());
             currentProcess.setResponseTime(currentProcess.getStartTimes().getFirst() - currentProcess.getArrivalTime() + 1);
             processCount--;
@@ -41,6 +40,11 @@ public class Priority extends Algorithm{
 
     @java.lang.Override
     public void printDetails() {
+        System.out.println("Priority Scheduling Algorithm");
+        System.out.println("Process ID\tStart Time\tWaiting Time\tEjecution Time\tResponse Time");
+        for (Process process : processQueue) {
+            System.out.println(process.getProcessId() + "\t\t\t\t" + process.getStartTimes().getFirst() + "\t\t\t\t"  + process.getWaitingTime() +"\t\t\t\t" + (process.getWaitingTime()+process.getBurstTime())  + "\t\t\t\t" + process.getResponseTime());
+        }
 
     }
 }
