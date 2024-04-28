@@ -2,6 +2,7 @@ package main.java.gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class MainFrame {
     private JCheckBox FCFSCheckBox;
     private JButton ejecutarButton;
     private JTextField quantumField;
-    private JPanel GrantPanel;
+    private JPanel grantPanel;
     private int quantum = 0;
     private static Algorithm algorithmProcess;
 
@@ -73,8 +74,11 @@ public class MainFrame {
         ejecutarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                processList = CSVToClass.convertToClass(processListString);
+                List<GantChart> gantCharts = new ArrayList<>();
+                grantPanel.setLayout(new GridLayout(0, 1));
+                grantPanel.removeAll();
                 selectedAlgorithms.clear();
+                processList = CSVToClass.convertToClass(processListString);
                 if (SJFNPCheckBox.isSelected()) {
                     selectedAlgorithms.add("SJFNP");
                 }
@@ -112,7 +116,6 @@ public class MainFrame {
                             sjf_np.execute();
                             sjf_np.printDetails();
                             algorithmProcess = sjf_np;
-
                             break;
                         case "priority":
                             Priority priority = new Priority(processList);
@@ -145,9 +148,18 @@ public class MainFrame {
                             algorithmProcess = fcfs;
                             break;
                     }
-                    System.out.println(algorithm);
+                    gantCharts.add(new GantChart(algorithmProcess));
+
                 }
+                for(GantChart gantChart : gantCharts){
+                    grantPanel.add(gantChart.getPanel());
+                }
+                grantPanel.revalidate();
+
+                grantPanel.repaint();
             }
+
+
         });
 
     }
@@ -159,11 +171,6 @@ public class MainFrame {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
-
-
-
-
     }
 
 
