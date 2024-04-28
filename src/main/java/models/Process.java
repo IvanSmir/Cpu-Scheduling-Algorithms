@@ -13,7 +13,10 @@ public class Process {
     private List<Integer> endTimes;
     private int waitingTime;
     private int responseTime;
+    private int ejecutionTime;
+
     private boolean isStarted = false;
+
 
     public Process(int processId, int arrivalTime, int burstTime) {
         this.processId = processId;
@@ -43,6 +46,7 @@ public class Process {
     public int getBurstTime() {
         return burstTime;
     }
+
 
     public void setBurstTime(int burstTime) {
         this.burstTime = burstTime;
@@ -96,6 +100,9 @@ public class Process {
     }
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+    public int getEjucutionTime() {
+        return burstTime + waitingTime;
     }
 
 }
