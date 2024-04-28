@@ -37,23 +37,6 @@ public class RR extends Algorithm {
         }
     }
 
-    @Override
-    public double getAverageWaitingTime() {
-        double totalWaitingTime = 0;
-        for (Process process : processQueue) {
-            totalWaitingTime += process.getWaitingTime();
-        }
-        return totalWaitingTime / processQueue.size();
-    }
-
-    @Override
-    public double getAverageResponseTime() {
-        double totalResponseTime = 0;
-        for (Process process : processQueue) {
-            totalResponseTime += process.getResponseTime();
-        }
-        return totalResponseTime / processQueue.size();
-    }
 
     @Override
     public void printDetails() {
