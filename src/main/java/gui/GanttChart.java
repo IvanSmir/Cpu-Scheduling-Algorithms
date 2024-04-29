@@ -11,24 +11,18 @@ public class GanttChart {
     private JPanel panel;
     private JTable ganttTable;
     private JTable resultsTable;
-    private static Algorithm algorithm;
+    private Algorithm algorithmProcess;
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("GanttChart");
-        frame.setContentPane(new GanttChart().panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
 
-    public GanttChart() {
-        this.panel = panel;
-        this.algorithm = algorithm;
+    public GanttChart(Algorithm algorithmProcess) {
+        this.algorithmProcess = algorithmProcess;
+        rellenarResults();
+        rellenarTabla();
     }
     public void rellenarTabla() {
-        Integer[] columnNames = new Integer[algorithm.getCurrentTime()];
+        Integer[] columnNames = new Integer[algorithmProcess.getCurrentTime()];
 
-        List<Process> processQueue = algorithm.getProcessQueue();
+        List<Process> processQueue = algorithmProcess.getProcessQueue();
         String[][] data = new String[columnNames.length][processQueue.size()];
         for (int j = 0; j < columnNames.length; j++) {
             columnNames[j] = j;
@@ -55,8 +49,7 @@ public class GanttChart {
         ganttTable.setModel(model);
     }
     public void rellenarResults() {
-        String[] columnNames = {"ID", "Wating time", "Ejecution Time", "Response time"};
-        List <Process> processList = algorithm.getProcessQueue();
+        List <Process> processList = algorithmProcess.getProcessQueue();
         String[][] data = new String[processList.size()][4];
         for (int i = 0; i < processList.size(); i++) {
             data[i][0] = String.valueOf(processList.get(i).getProcessId());
@@ -64,8 +57,14 @@ public class GanttChart {
             data[i][2] = String.valueOf(processList.get(i).getEjucutionTime());
             data[i][3] = String.valueOf(processList.get(i).getResponseTime());
         }
+        String[] columnNames = {"ID", "Wating time", "Ejecution Time", "Response time"};
+
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         resultsTable.setModel(model);
     }
+
+    public JPanel getPanel() {
+        return panel;
     }
+}
 

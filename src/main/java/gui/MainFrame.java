@@ -74,7 +74,7 @@ public class MainFrame {
         ejecutarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<GantChart> gantCharts = new ArrayList<>();
+                List<GanttChart> gantCharts = new ArrayList<>();
                 grantPanel.setLayout(new GridLayout(0, 1));
                 grantPanel.removeAll();
                 selectedAlgorithms.clear();
@@ -148,11 +148,11 @@ public class MainFrame {
                             algorithmProcess = fcfs;
                             break;
                     }
-                    gantCharts.add(new GantChart(algorithmProcess));
+                    gantCharts.add(new GanttChart(algorithmProcess));
 
                 }
-                for(GantChart gantChart : gantCharts){
-                    grantPanel.add(gantChart.getPanel());
+                for(GanttChart ganttChart : gantCharts){
+                    grantPanel.add(ganttChart.getPanel());
                 }
                 grantPanel.revalidate();
 
