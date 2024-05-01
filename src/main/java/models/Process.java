@@ -13,7 +13,6 @@ public class Process {
     private List<Integer> endTimes;
     private int waitingTime;
     private int responseTime;
-    private int ejecutionTime;
 
     private boolean isStarted = false;
 

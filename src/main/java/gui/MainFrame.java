@@ -54,7 +54,7 @@ public class MainFrame {
                         JDialog dialog = new JDialog();
                         dialog.setAlwaysOnTop(true);
                         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                        dialog.add(new JLabel("Formato incorrecto de CSV"));
+                        dialog.add(new JLabel("Formato incorrecto de CSV. Revisa el csv adjunto y vuelve a intentarlo"));
                         dialog.pack();
                         dialog.setLocationRelativeTo(null);
                         dialog.setVisible(true);
