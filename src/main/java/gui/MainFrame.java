@@ -33,6 +33,7 @@ public class MainFrame {
     private JScrollPane scrollPanel;
     private int quantum = 0;
     private static Algorithm algorithmProcess;
+    private static String algorithmName;
 
     public MainFrame() {
         List<String> selectedAlgorithms = new ArrayList<>();
@@ -117,39 +118,47 @@ public class MainFrame {
                             sjf_np.execute();
                             sjf_np.printDetails();
                             algorithmProcess = sjf_np;
+                            algorithmName= "SJF NON PREEMPTIVE";
+
                             break;
                         case "priority":
                             Priority priority = new Priority(processList);
                             priority.execute();
                             priority.printDetails();
                             algorithmProcess = priority;
+                            algorithmName= "PRIORITY";
                             break;
                         case "RR":
                             RR rr = new RR(processList, quantum);
                             rr.execute();
                             rr.printDetails();
                             algorithmProcess = rr;
+                            algorithmName= "ROUND ROBIN (Q: "+quantum+")";
                             break;
                         case "HHRN":
                             HRRN hrrn = new HRRN(processList);
                             hrrn.execute();
                             hrrn.printDetails();
                             algorithmProcess = hrrn;
+                            algorithmName= "HRRN";
                             break;
                         case "SJFP":
                             SJF_P sjf_p = new SJF_P(processList);
                             sjf_p.execute();
                             sjf_p.printDetails();
                             algorithmProcess = sjf_p;
+                            algorithmName= "SJF PREEMPTIVE";
+
                             break;
                         case "FCFS":
                             FCFS fcfs = new FCFS(processList);
                             fcfs.execute();
                             fcfs.printDetails();
                             algorithmProcess = fcfs;
+                            algorithmName= "FIRST COME FIRST SERVE";
                             break;
                     }
-                    gantCharts.add(new GanttChart(algorithmProcess));
+                    gantCharts.add(new GanttChart(algorithmProcess,algorithmName));
 
                 }
                 for(GanttChart ganttChart : gantCharts){
