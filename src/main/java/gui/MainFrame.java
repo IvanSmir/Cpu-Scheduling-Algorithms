@@ -155,9 +155,11 @@ public class MainFrame {
                 for(GanttChart ganttChart : gantCharts){
                     ganttPanel.add(ganttChart.getPanel());
                 }
-                ganttPanel.revalidate();
 
+
+                ganttPanel.revalidate();
                 ganttPanel.repaint();
+
             }
 
 
@@ -173,6 +175,5 @@ public class MainFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
 
 }
