@@ -11,6 +11,7 @@ public class GanttChart {
     private JPanel panel;
     private JTable ganttTable;
     private JTable resultsTable;
+    private JTable averageTable;
     private Algorithm algorithmProcess;
 
 
@@ -21,33 +22,44 @@ public class GanttChart {
     }
     public void rellenarTabla() {
         Integer[] columnNames = new Integer[algorithmProcess.getCurrentTime()];
-
-        List<Process> processQueue = algorithmProcess.getProcessQueue();
-        String[][] data = new String[columnNames.length][processQueue.size()];
         for (int j = 0; j < columnNames.length; j++) {
             columnNames[j] = j;
         }
-        for (Process process : processQueue) {
+
+        List<Process> processQueue = algorithmProcess.getProcessQueue();
+        String[][] data = new String[processQueue.size()][columnNames.length];
+        for (int rowIndex = 0; rowIndex < processQueue.size(); rowIndex++) {
+            Process process = processQueue.get(rowIndex);
             List<Integer> startTimes = process.getStartTimes();
             List<Integer> endTimes = process.getEndTimes();
-            int count = 0;
-            for (int i = 0; i < startTimes.size() - 1; i++) {
-                while (count < process.getArrivalTime()) {
-                    data[i][count] = "";
-                    count++;
+            int lastEndTime = endTimes.getLast();
+            for (int t = 0; t < startTimes.getFirst(); t++) {
+                data[rowIndex][t] = "";
+            }
+            // Llena los   espacios antes del primer startTime y entre ejecuciones
+            for (int burstIndex = 0; burstIndex < startTimes.size(); burstIndex++) {
+                for (int i = process.getArrivalTime() ; i< startTimes.getFirst() ; i++) {
+                    data[rowIndex][i] = "0";
                 }
-                while (count < startTimes.get(i)) {
-                    data[i][count] = "0";
-                    count++;
+                for (int t = lastEndTime; t < startTimes.get(burstIndex); t++) {
+                    data[rowIndex][t] = "0";
                 }
-                for (int j = startTimes.get(i); j < endTimes.get(i); j++) {
-                    data[i][j] = "X";
+                for (int t = startTimes.get(burstIndex); t < endTimes.get(burstIndex); t++) {
+                    data[rowIndex][t] = "X";
                 }
+                lastEndTime = endTimes.get(burstIndex);
+
+            }
+
+            for (int t = endTimes.getLast(); t < columnNames.length; t++) {
+                data[rowIndex][t] = "";
             }
         }
+
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         ganttTable.setModel(model);
     }
+
     public void rellenarResults() {
         List <Process> processList = algorithmProcess.getProcessQueue();
         String[][] data = new String[processList.size()][4];
@@ -65,6 +77,10 @@ public class GanttChart {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
 

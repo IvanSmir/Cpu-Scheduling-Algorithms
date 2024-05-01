@@ -29,7 +29,8 @@ public class MainFrame {
     private JCheckBox FCFSCheckBox;
     private JButton ejecutarButton;
     private JTextField quantumField;
-    private JPanel grantPanel;
+    private JPanel ganttPanel;
+    private JScrollPane scrollPanel;
     private int quantum = 0;
     private static Algorithm algorithmProcess;
 
@@ -75,8 +76,8 @@ public class MainFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<GanttChart> gantCharts = new ArrayList<>();
-                grantPanel.setLayout(new GridLayout(0, 1));
-                grantPanel.removeAll();
+                ganttPanel.setLayout(new GridLayout(0, 1));
+                ganttPanel.removeAll();
                 selectedAlgorithms.clear();
                 processList = CSVToClass.convertToClass(processListString);
                 if (SJFNPCheckBox.isSelected()) {
@@ -152,11 +153,11 @@ public class MainFrame {
 
                 }
                 for(GanttChart ganttChart : gantCharts){
-                    grantPanel.add(ganttChart.getPanel());
+                    ganttPanel.add(ganttChart.getPanel());
                 }
-                grantPanel.revalidate();
+                ganttPanel.revalidate();
 
-                grantPanel.repaint();
+                ganttPanel.repaint();
             }
 
 
